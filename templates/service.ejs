@@ -1,0 +1,29 @@
+import { Injectable } from '@nestjs/common';
+import { <%= modelName %>, Prisma } from '@prisma/client';
+
+import { <%= modelName %>Repository } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.repository';
+
+@Injectable()
+export class <%= modelName %>Service {
+  constructor(private <%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Repository: <%= modelName %>Repository) {}
+
+  async create<%= modelName %>(data: Prisma.<%= modelName %>CreateInput): Promise<<%= modelName %>> {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Repository.create(data);
+  }
+
+  async findById(id: number): Promise<<%= modelName %> | null> {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Repository.findById(id);
+  }
+
+  async findAll(): Promise<<%= modelName %>[]> {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Repository.findAll();
+  }
+
+  async update<%= modelName %>(id: number, data: Prisma.<%= modelName %>UpdateInput): Promise<<%= modelName %>> {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Repository.update(id, data);
+  }
+
+  async delete<%= modelName %>(id: number): Promise<<%= modelName %>> {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Repository.delete(id);
+  }
+}

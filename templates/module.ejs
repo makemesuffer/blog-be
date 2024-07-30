@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common';
+
+import { PrismaService } from '../../global/services/prisma.service';
+import { <%= modelName %>Service } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.service';
+import { <%= modelName %>Resolver } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.resolver';
+import { <%= modelName %>Repository } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.repository';
+
+@Module({
+    providers: [<%= modelName %>Service, <%= modelName %>Resolver, <%= modelName %>Repository, PrismaService],
+})
+
+export class <%= modelName %>Module {}

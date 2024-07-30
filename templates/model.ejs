@@ -1,0 +1,19 @@
+import { ObjectType, Field, Int } from '@nestjs/graphql';
+
+@ObjectType()
+export class <%= modelName %> {
+  @Field(() => Int)
+  id: number;
+
+  <% fields.forEach(field => { -%>
+    @Field()
+    <%= field.name %>: <%= field.type %>;
+    
+  <% }); -%>
+
+  @Field(() => Date)
+  createdAt: Date;
+
+  @Field(() => Date)
+  updatedAt: Date;
+}

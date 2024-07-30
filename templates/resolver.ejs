@@ -1,0 +1,38 @@
+import { Resolver, Query, Mutation } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
+
+import { <%= modelName %>Service } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.service';
+import { <%= modelName %> } from './models/<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.model';
+
+@Resolver(() => <%= modelName %>)
+export class <%= modelName %>Resolver {
+  constructor(private <%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Service: <%= modelName %>Service) {}
+
+  @Query(() => [<%= modelName %>], { name: '<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>s' })
+  async findAll() {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Service.findAll();
+  }
+
+  @Query(() => <%= modelName %>, { name: '<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>' })
+  async findById(@Args('id', { type: () => Int }) id: number) {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Service.findById(id);
+  }
+
+  @Mutation(() => <%= modelName %>)
+  async create<%= modelName %>(@Args('create<%= modelName %>Input') create<%= modelName %>Input: Prisma.<%= modelName %>CreateInput) {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Service.create<%= modelName %>(create<%= modelName %>Input);
+  }
+
+  @Mutation(() => <%= modelName %>)
+  async update<%= modelName %>(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('update<%= modelName %>Input') update<%= modelName %>Input: Prisma.<%= modelName %>UpdateInput
+  ) {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Service.update<%= modelName %>(id, update<%= modelName %>Input);
+  }
+
+  @Mutation(() => <%= modelName %>)
+  async delete<%= modelName %>(@Args('id', { type: () => Int }) id: number) {
+    return this.<%= modelName.charAt(0).toLowerCase() + modelName.slice(1) %>Service.delete<%= modelName %>(id);
+  }
+}
