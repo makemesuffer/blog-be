@@ -1,8 +1,8 @@
-import { Resolver, Query, Mutation } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
 import { PostService } from './post.service';
 import { Post } from './models/post.model';
+import { CreatePostInput, UpdatePostInput } from './inputs';
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -19,16 +19,14 @@ export class PostResolver {
   }
 
   @Mutation(() => Post)
-  async createPost(
-    @Args('createPostInput') createPostInput: Prisma.PostCreateInput,
-  ) {
+  async createPost(@Args('createPostInput') createPostInput: CreatePostInput) {
     return this.postService.createPost(createPostInput);
   }
 
   @Mutation(() => Post)
   async updatePost(
     @Args('id', { type: () => Int }) id: number,
-    @Args('updatePostInput') updatePostInput: Prisma.PostUpdateInput,
+    @Args('updatePostInput') updatePostInput: UpdatePostInput,
   ) {
     return this.postService.updatePost(id, updatePostInput);
   }

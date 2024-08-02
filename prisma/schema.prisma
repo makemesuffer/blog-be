@@ -16,34 +16,30 @@ model User {
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String
-  published Boolean @default(false)
-  authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
-}
-
-model AuthorInfo {
-  id     Int     @id @default(autoincrement())
-  skills Skill[]
+  id             Int     @id @default(autoincrement())
+  title          String
+  contentPreview String
+  content        String
+  published      Boolean @default(false)
+  authorId       Int
+  author         User    @relation(fields: [authorId], references: [id])
 }
 
 model Skill {
-  id           Int         @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   name         String
   seniority    String
   authorInfoId Int
   projectId    Int?
-  authorInfo   AuthorInfo  @relation(fields: [authorInfoId], references: [id])
-  project      Project?    @relation(fields: [projectId], references: [id])
+  experienceId Int?
+  skillId      Int?
+  project      Project?   @relation(fields: [projectId], references: [id])
 }
 
 model Project {
   id             Int       @id @default(autoincrement())
   title          String
   content        String
-  authorInfoId   Int
   projectHistory History[]
   skills         Skill[]
 }
@@ -53,4 +49,10 @@ model History {
   content   String
   projectId Int
   project   Project @relation(fields: [projectId], references: [id])
+}
+
+model Experience {
+  id        Int    @id @default(autoincrement())
+  name      String
+  workTitle String
 }

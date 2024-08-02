@@ -1,12 +1,15 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
-export class AuthorInfo {
+export class Experience {
   @Field(() => Int)
   id: number;
 
   @Field()
-  skills: string;
+  name: string;
+
+  @Field()
+  workTitle: string;
 
   @Field(() => Date)
   createdAt: Date;

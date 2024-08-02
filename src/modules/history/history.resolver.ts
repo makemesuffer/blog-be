@@ -1,8 +1,8 @@
-import { Resolver, Query, Mutation } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
 import { HistoryService } from './history.service';
 import { History } from './models/history.model';
+import { CreateHistoryInput, UpdateHistoryInput } from './inputs';
 
 @Resolver(() => History)
 export class HistoryResolver {
@@ -20,7 +20,7 @@ export class HistoryResolver {
 
   @Mutation(() => History)
   async createHistory(
-    @Args('createHistoryInput') createHistoryInput: Prisma.HistoryCreateInput,
+    @Args('createHistoryInput') createHistoryInput: CreateHistoryInput,
   ) {
     return this.historyService.createHistory(createHistoryInput);
   }
@@ -28,7 +28,7 @@ export class HistoryResolver {
   @Mutation(() => History)
   async updateHistory(
     @Args('id', { type: () => Int }) id: number,
-    @Args('updateHistoryInput') updateHistoryInput: Prisma.HistoryUpdateInput,
+    @Args('updateHistoryInput') updateHistoryInput: UpdateHistoryInput,
   ) {
     return this.historyService.updateHistory(id, updateHistoryInput);
   }
