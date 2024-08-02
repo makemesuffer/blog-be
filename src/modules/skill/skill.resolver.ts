@@ -1,8 +1,8 @@
-import { Resolver, Query, Mutation } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
 import { SkillService } from './skill.service';
 import { Skill } from './models/skill.model';
+import { CreateSkillInput, UpdateSkillInput } from './inputs';
 
 @Resolver(() => Skill)
 export class SkillResolver {
@@ -20,7 +20,7 @@ export class SkillResolver {
 
   @Mutation(() => Skill)
   async createSkill(
-    @Args('createSkillInput') createSkillInput: Prisma.SkillCreateInput,
+    @Args('createSkillInput') createSkillInput: CreateSkillInput,
   ) {
     return this.skillService.createSkill(createSkillInput);
   }
@@ -28,7 +28,7 @@ export class SkillResolver {
   @Mutation(() => Skill)
   async updateSkill(
     @Args('id', { type: () => Int }) id: number,
-    @Args('updateSkillInput') updateSkillInput: Prisma.SkillUpdateInput,
+    @Args('updateSkillInput') updateSkillInput: UpdateSkillInput,
   ) {
     return this.skillService.updateSkill(id, updateSkillInput);
   }

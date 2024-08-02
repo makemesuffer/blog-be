@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { <%= modelName %>, Prisma } from '@prisma/client';
 
-import { <%= modelName %>Repository } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.repository';
+import { <%= modelName %>Repository } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1).toLowerCase() %>.repository';
 
 @Injectable()
 export class <%= modelName %>Service {

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
 import { PrismaService } from '../../global/services/prisma.service';
-import { <%= modelName %>Service } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.service';
-import { <%= modelName %>Resolver } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.resolver';
-import { <%= modelName %>Repository } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1) %>.repository';
+import { <%= modelName %>Service } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1).toLowerCase() %>.service';
+import { <%= modelName %>Resolver } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1).toLowerCase() %>.resolver';
+import { <%= modelName %>Repository } from './<%= fileName.charAt(0).toLowerCase() + fileName.slice(1).toLowerCase() %>.repository';
 
 @Module({
     providers: [<%= modelName %>Service, <%= modelName %>Resolver, <%= modelName %>Repository, PrismaService],

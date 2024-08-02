@@ -1,8 +1,8 @@
-import { Resolver, Query, Mutation } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
 import { ProjectService } from './project.service';
 import { Project } from './models/project.model';
+import { CreateProjectInput, UpdateProjectInput } from './inputs';
 
 @Resolver(() => Project)
 export class ProjectResolver {
@@ -20,7 +20,7 @@ export class ProjectResolver {
 
   @Mutation(() => Project)
   async createProject(
-    @Args('createProjectInput') createProjectInput: Prisma.ProjectCreateInput,
+    @Args('createProjectInput') createProjectInput: CreateProjectInput,
   ) {
     return this.projectService.createProject(createProjectInput);
   }
@@ -28,7 +28,7 @@ export class ProjectResolver {
   @Mutation(() => Project)
   async updateProject(
     @Args('id', { type: () => Int }) id: number,
-    @Args('updateProjectInput') updateProjectInput: Prisma.ProjectUpdateInput,
+    @Args('updateProjectInput') updateProjectInput: UpdateProjectInput,
   ) {
     return this.projectService.updateProject(id, updateProjectInput);
   }

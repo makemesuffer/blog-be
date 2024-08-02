@@ -18,6 +18,12 @@ export class Skill {
   projectId: number;
 
   @Field()
+  experienceId: number;
+
+  @Field()
+  skillId: number;
+
+  @Field()
   authorInfo: string;
 
   @Field()

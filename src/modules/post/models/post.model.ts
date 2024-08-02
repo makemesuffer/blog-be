@@ -9,6 +9,9 @@ export class Post {
   title: string;
 
   @Field()
+  contentPreview: string;
+
+  @Field()
   content: string;
 
   @Field()
